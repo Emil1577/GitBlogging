@@ -17,16 +17,24 @@ Blog.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        blog: {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        contents: {
             type: DataTypes.STRING,
             allowNuell: false,
         },
+        created_date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+          },
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelNamr: 'blogs',
+        modelName: 'blog',
     }
 );
 

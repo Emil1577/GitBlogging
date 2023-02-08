@@ -12,24 +12,20 @@ Comment.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        contents: {
+        commenter: {
             type: DataTypes.STRING,
             allowNuell: false,
         },
-        created_date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-          },
+        comment: {
+            type: DataTypes.STRING,
+            allowNuell: false,
+        },
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelNamr: 'comments',
+        modelName: 'comment',
     }
 );
 
