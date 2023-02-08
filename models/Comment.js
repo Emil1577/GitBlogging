@@ -7,7 +7,7 @@ Comment.init(
     {
 
         id: {
-            type: DataTypes, INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true,
@@ -19,7 +19,15 @@ Comment.init(
         comment: {
             type: DataTypes.STRING,
             allowNuell: false,
+            
         },
+        blog_id: {
+            type: DataTypes.INTEGER,
+            references: {
+              model: 'blog',
+              key: 'id',
+            },
+          },
     },
     {
         sequelize,

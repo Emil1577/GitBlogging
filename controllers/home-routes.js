@@ -16,10 +16,10 @@ router.get('/', async (req, res) => {
         blog.get({ plain: true })
         );
         console.log("blogs:", blogs);
-        console.log("blogs[0].comments[0].comment:", blogs[0].comments[0].comment);
+        //console.log("blogs[0].comments[0].comment:", blogs[1].comments[1].comment);
         res.render('homepage', {
-            comments,
-            loggedIn: req.sessions.loggedIn,
+            blogs,
+            loggedIn: req.session.loggedIn,
         });
     } catch (err) {
         console.log(err);
@@ -54,7 +54,7 @@ router.get('/blog/:id', async (req, res) => {
 
 // Get one comment
 
-router.get('/comment/:id', async (res,res) => {
+router.get('/comment/:id', async (req,res) => {
     try{
         const dbCommentData = await Comment.findByPak(req.params.id);
         res.render('comment', { comment, loggedIn: req.session.loggedIn });

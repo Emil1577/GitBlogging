@@ -4,12 +4,12 @@ const commentData = [
     {
         commenter:'testing commenter name',
         comment: 'comment test',
-        blog_id: 1
+        blog_id: 1,
 
     },
 
 ];
 
-const seedComment = () => Comment.bulkCreate(commentdata);
+const seedComment = () => Comment.bulkCreate(commentData);
 
 module.exports = seedComment;

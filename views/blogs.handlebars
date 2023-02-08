@@ -1,0 +1,17 @@
+<section class="container">
+  <h3 class="gallery-name">{{blog.name}}</h3>
+  <h3 class="gallery-name">{{blog.title}}</h3>
+  <h3 class="gallery-name">{{blog.contents}}</h3>
+  <h4>Created: {{format_time blog.created_date}}</h4>
+
+
+  {{#if loggedIn}}
+  <section class="flex-row justify-center">
+    {{#each blog.comments as |comment|}}
+    {{> comment-details}}
+    {{/each}}
+  </section>
+</section>
+{{else}}
+<a href="/login">You must login first to view this page</a>
+{{/if}}

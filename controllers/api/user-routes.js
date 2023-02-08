@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
 
-            res.setMaxListeners(200).json(dbUsernData);
+            res.setMaxListeners(200).json(dbUserData);
         });
 
     } catch (err) {

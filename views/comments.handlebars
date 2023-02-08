@@ -1,0 +1,11 @@
+{{#if loggedIn}}
+<section class="painting">
+
+  <div class="painting-details">
+    <h3>{{comment.comments}}</h3>
+    <p>By: {{comment.commenters}}</p>
+  </div>
+</section>
+{{else}}
+<a href="/login">You must login first to view this page</a>
+{{/if}}
