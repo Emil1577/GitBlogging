@@ -9,13 +9,13 @@ Blog.init(
         id: {
 
             type: DataTypes.INTEGER,
-            allowNull: false,
+           // allowNull: false,
             primaryKey: true,
             autoIncrement: true,
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+           // allowNull: false,
         },
         title: {
             type: DataTypes.STRING,
