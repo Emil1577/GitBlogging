@@ -1,11 +1,14 @@
-{{#if loggedIn}}
-<section class="painting">
 
-  <div class="painting-details">
-    <h3>{{comment.comments}}</h3>
-    <p>By: {{comment.commenters}}</p>
-  </div>
+ {{#if loggedIn}}
+<section class="comment">
+  <div class="form-group">
+        <label for="comment">Title:</label>
+        <input class="title-input"type="text" id="email-login" />
+      </div>
+  <div class="form-group">
+        <label for="title"> {{blog.name}}Comment:</label>
+        <input class="comment-input" type="text" id="email-login" />
+      </div>
+
 </section>
-{{else}}
-<a href="/login">You must login first to view this page</a>
-{{/if}}
+   {{/if}}

@@ -1,9 +1,13 @@
 const router = require('express').Router();
 const { Blog, Comment } = require('../models');
+const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
-    try{
+router.get('/', withAuth, async (req, res) => {
 
+console.log(req.session.loggedIn);
+console.log(req.session);
+
+    if(req.session.loggedIn){
         const dbBlogData = await Blog.findAll({
             attributes: [
                 'id',
@@ -22,18 +26,19 @@ router.get('/', async (req, res) => {
         const blogs = dbBlogData.map((blog) =>
         blog.get({ plain: true })
         );
-        console.log("blogs:", 'blogs');
-        //console.log("blogs[0].comments[0].comment:", blogs[1].comments[1].comment);
-        res.render('homepage', {
-            blogs,
-            loggedIn: req.session.loggedIn,
+        console.log("comments:", 'blogs');
+
+        res.render('comments', {
+    //blogs,
+            loggedIn : req.session.loggedIn,
         });
         
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    } 
-});
+        //console.log("blogs[0].comments[0].comment:", blogs[1].comments[1].comment);
+    }else{
+        res.render('signup')
+        
+    }
+    });
 
 //Get one comment
 

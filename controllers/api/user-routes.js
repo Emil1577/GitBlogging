@@ -16,7 +16,7 @@ router.post('/signup', async (req, res) => {
 
             res.status(200).json(dbUserData);
         });
-
+console.log(req.session);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -54,6 +54,7 @@ router.post('/login', async (req,res) => {
       res
         .status(200)
         .json({ user: dbUserData, message: 'You are now logged in!' });
+        console.log(req.session.loggedIn);
     });
   } catch (err) {
     console.log(err);
