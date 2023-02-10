@@ -25,8 +25,10 @@ router.get('/', async (req, res) => {
     // //  res.render('blogs', { blogs: blogData });
 
     // res.json(blogs)
+  //res.render('blogs', {layout:'dashboard'})
 
     res.render('blogs', {
+        layout:'dashboard',
         blogs,
         logged_in: req.session.logged_in,
       });
