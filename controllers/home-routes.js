@@ -2,12 +2,14 @@ const router = require('express').Router();
 const { Blog, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
 
-console.log(req.session.loggedIn);
-console.log(req.session);
+    console.log(req.session.loggedIn);
+    console.log(req.session);
 
-    if(req.session.loggedIn){
+    try{ 
+        console.log (req.session)
+        console.log('am i in')
         const dbBlogData = await Blog.findAll({
             attributes: [
                 'id',
@@ -24,21 +26,19 @@ console.log(req.session);
             ],
         });
         const blogs = dbBlogData.map((blog) =>
-        blog.get({ plain: true })
+            blog.get({ plain: true })
         );
         console.log("comments:", 'blogs');
 
         res.render('comments', {
-    //blogs,
-            loggedIn : req.session.loggedIn,
-        });
-        
-        //console.log("blogs[0].comments[0].comment:", blogs[1].comments[1].comment);
-    }else{
-        res.render('signup')
-        
-    }
-    });
+        loggedIn: req.session.loggedIn,
+    })
+
+    } catch (err) {
+        res.status(500).json(err);
+      }
+
+});
 
 //Get one comment
 
@@ -56,7 +56,7 @@ console.log(req.session);
 //           },
 //         ],
 //       });
-  
+
 //       const gallery = bdBlogData.get({ plain: true });
 //       res.render('blog', { blog, loggedIn: req.session.loggedIn });
 //     } catch (err) {
@@ -79,15 +79,15 @@ console.log(req.session);
 
 // Login Route
 
-router.get('/login', (req,res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+router.get('/login', (req, res) => {
+    // if (req.session.loggedIn) {
+    //     res.redirect('/');
+    //     return;
+    // }
     res.render('login');
 })
 
-router.get('/signup', (req,res) => {
+router.get('/signup', (req, res) => {
 
     res.render('signup');
 })
