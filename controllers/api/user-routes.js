@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
         });
 
         req.session.save(() => {
-            req.session.loggedIn = true;
+            loggedIn=req.session.loggedIn;
 
             res.status(200).json(dbUserData);
         });
@@ -49,7 +49,7 @@ router.post('/login', async (req,res) => {
     }
 
     req.session.save(() => {
-      req.session.loggedIn = true;
+        loggedIn= req.session.loggedIn,
 
       res
         .status(200)

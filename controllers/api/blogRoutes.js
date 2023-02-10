@@ -1,43 +1,8 @@
 const router = require('express').Router();
 const { json } = require('body-parser');
 const { Blog } = require('../../models');
+const { belongsToMany } = require('../../models/User');
 
-
-router.get('/', async (req, res) => {
-
-
-    try {
-      // console.log(req.session.loggedIn)
-      // console.log('am i in')
-      const dbBlogData = await Blog.findAll({
-        // attributes: [
-        //   'id',
-        //   'name',
-        //   'title',
-        //   'contents',
-        //   'created_date'
-        // ],
-        // include: [
-        //     {
-        //         model: Comment,
-        //         attribute: ['commenter', 'comment'],
-        //     },
-        // ],
-      });
-
-        res.status(200).json(dbBlogData);
-
-      const blogs = dbBlogData.map((blog) =>
-        blog.get({ plain: true })
-      
-      );
-    
-    }
-    catch (err) {
-      res.status(500).json(err);
-    }
-
-  });
 
 
   router.post('/', async (req, res) => {

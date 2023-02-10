@@ -8,44 +8,34 @@ const {
 const withAuth = require('../utils/auth');
 
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
+    try {
+      // Get all users, sorted by name
+      const blogData = await Blog.findAll({
+        // attributes: { exclude: ['password'] },
+        order: [['name', 'ASC']],
+      });
+    //  console.log("userData", blogData);
+      // Serialize user data so templates can read it
+      const blogs = blogData.map((blog) => blog.get({ plain: true }));
+    //  const blogs = blogData.map((blog) => blog.dataValues);
+    //  console.log("blogs", blogs);
+    // //    console.log("blogsi dontknow", blog.name[1]);
+    // //   // Pass serialized data into Handlebars.js template
+    // //  res.render('blogs', { blogs: blogData });
 
-    console.log(req.session.loggedIn);
-    console.log(req.session);
-console.log('im in blog')
-    try{ 
-        console.log (req.session.loggedIn)
-        console.log('am i in')
-        const dbBlogData = await Blog.findAll({
-            attributes: [
-                'id',
-                'name',
-                'title',
-                'contents',
-                'created_date'
-            ],
-            // include: [
-            //     {
-            //         model: Comment,
-            //         attribute: ['commenter', 'comment'],
-            //     },
-            // ],
-        });
-        const blogs = dbBlogData.map((blog) =>
-            blog.get({ plain: true })
-        );
-        console.log("comments:", 'blogs');
+    // res.json(blogs)
 
-        // res.render('comments', {
-        // loggedIn: req.session.loggedIn,
-        res.render('blogs', { layout: 'dashboard' })
+    res.render('blogs', {
+        blogs,
+        logged_in: req.session.logged_in,
+      });
 
+    } catch (err) {
+      res.status(500).json(err);
     }
-     catch (err) {
-        res.status(500).json(err);
-      }
-
-    });
+  });
+  
 
 
  
